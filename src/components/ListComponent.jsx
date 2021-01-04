@@ -39,7 +39,6 @@ class ListComponent extends React.Component {
     state = {
         usersList: [],
         pageNo: 1,
-        redirectToLoginPage: false,
         redirectToHomePage: false,
     };
 
@@ -61,25 +60,20 @@ class ListComponent extends React.Component {
     handleLogout = () => {
         localStorage.removeItem('jwt');
         this.setState({
-            redirectToLoginPage: true,
+            redirectToHomePage: true,
         });
     }
 
 
     render() {
         const { handleLogout } = this;
-        const { usersList, redirectToLoginPage, redirectToHomePage } = this.state;
+        const { usersList, redirectToHomePage } = this.state;
         if (redirectToHomePage) {
             return (
                 <Redirect to='/' />
             )
         }
 
-        if (redirectToLoginPage) {
-            return (
-                <Redirect to='/admin/login' />
-            )
-        }
         return (
             <div className='listing-page'>
                 <Button type="primary" onClick={handleLogout} icon={<PoweroffOutlined />}>
